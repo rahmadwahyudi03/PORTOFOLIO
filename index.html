@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahmad Wahyudi - S1 Administrasi Bisnis</title>
+    <!-- Tailwind CSS & AOS / Animation Library Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=ChunkFive&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['ChunkFive', 'serif'],
+                    },
+                    colors: {
+                        darkBg: '#0b0f19',
+                        cardBg: '#111827',
+                        accent: '#6366f1'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'ChunkFive', serif !important;
+            background-color: #F4F1EA;
+            color: #1a1a1a;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+        }
+
+        section {
+            scroll-snap-align: start;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Hero Styling for Reference Style */
+            font-size: 5rem;
+            line-height: 1;
+            font-weight: 700;
+        }
+        .hero-title i { font-style: italic; font-family: serif; }
+
+        /* Slider and Zoom Helpers */
+        .slider-container { position: relative; width: 100%; height: 100%; overflow: hidden; }
+        .slider-track { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
+        .slider-slide { min-width: 100%; height: 100%; flex-shrink: 0; cursor: grab; }
+        .slider-slide img { width: 100%; height: 100%; object-fit: contain; background-color: #111827; transition: transform 0.3s ease; transform-origin: center center; }
+        .zoom-container { position: relative; overflow: hidden; cursor: grab; }
+        .zoom-container img { transition: transform 0.3s ease; transform-origin: center center; width: 100%; height: 100%; object-fit: contain; background-color: #111827; }
+        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.6); color: white; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; z-index: 10; }
+        .slider-container:hover .slider-btn { opacity: 1; }
+        .slider-prev { left: 10px; }
+        .slider-next { right: 10px; }
+
+        /* 3D Tilt Effect for Hero Photo */
+        .tilt-card {
+            transition: transform 0.1s ease, box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-100 font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-darkBg/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">PORTOFOLIO.</a>
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
+                <a href="#tentang" class="hover:text-indigo-400 transition">Tentang</a>
+                <a href="#proyek" class="hover:text-indigo-400 transition">Pengalaman</a>
+                    <a href="#sertifikat" class="hover:text-indigo-400 transition">Sertifikat</a>
+                    <a href="#keahlian" class="hover:text-indigo-400 transition">Keahlian</a>
+                <a href="#kontak" class="hover:text-indigo-400 transition">Kontak</a>
+            </nav>
+            <a href="#kontak" class="hidden md:inline-flex items-center px-4 py-2 text-sm font-medium bg-indigo-600 hover:bg-indigo-500 rounded-lg transition shadow-lg shadow-indigo-500/20">
+                Hubungi Saya
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-44 pb-32 px-6 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12" data-aos="fade-in">
+        <div class="flex-1 space-y-8 text-center md:text-left">
+            <div class="space-y-4">
+                <p class="text-sm tracking-[0.2em] text-gray-400 uppercase">Central Java · Indonesia</p>
+                <h1 class="text-5xl md:text-7xl font-serif italic font-bold">
+                    Hi, I'm <span class="text-indigo-400">Wahyu</span>.
+                </h1>
+                <p class="text-xl text-gray-300 font-light">S1 Administrasi Bisnis</p>
+            </div>
+            <a href="CV Rahmad Wahyudi.pdf" download class="inline-block px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-indigo-400 hover:text-white transition shadow-xl">
+                Unduh CV
+            </a>
+        </div>
+        <div class="relative w-80 h-96 tilt-card" id="tiltCard">
+            <div class="relative w-full h-full bg-gray-900 border border-gray-700 rounded-3xl shadow-2xl overflow-hidden flex flex-col items-center justify-between">
+                <div class="absolute top-4 left-4 text-gray-700 font-mono text-xl z-10">&lt;/&gt;</div>
+                <img src="FOTO PORTO.JPG" alt="Wahyu" class="w-full h-full object-cover rounded-3xl">
+                <div class="absolute bottom-4 left-4 right-4 bg-gray-900/80 backdrop-blur rounded-xl p-3 flex items-center justify-between text-xs text-gray-300 font-mono z-10">
+                    <span>@rahmadwahyuudi</span>
+                    <span class="flex items-center gap-1 text-green-400"><span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span> Available</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Tilt Effect
+        const tiltCard = document.getElementById('tiltCard');
+        if (tiltCard) {
+            tiltCard.addEventListener('mousemove', (e) => {
+                const rect = tiltCard.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const width = rect.width;
+                const height = rect.height;
+                const rotateY = ((x / width) - 0.5) * 20;
+                const rotateX = ((y / height) - 0.5) * -20;
+                tiltCard.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.02)`;
+            });
+            tiltCard.addEventListener('mouseleave', () => {
+                tiltCard.style.transform = `rotateY(0deg) rotateX(0deg) scale(1)`;
+            });
+        }
+    </script>
+
+    <!-- Tentang Section -->
+    <section id="tentang" class="py-20 bg-gray-900/50 border-y border-gray-800/60" data-aos="fade-up">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="max-w-2xl mx-auto mb-12 space-y-3">
+                <h2 class="text-3xl font-bold">Tentang Saya</h2>
+                <p class="text-gray-400">Sedikit latar belakang dan perjalanan profesional saya.</p>
+            </div>
+            <div class="space-y-6">
+                <p class="text-gray-300 leading-relaxed text-center">
+                    Saya lulusan Administrasi Bisnis dari Universitas Diponegoro (IPK 3,49/4,00) dengan pengalaman di bidang administrasi, kerja tim, dan manajemen waktu yang diperoleh melalui pengalaman kerja, magang, dan organisasi. Memiliki kemampuan dalam mengelola tugas administratif, berkolaborasi dalam tim, serta menyelesaikan pekerjaan sesuai tenggat waktu. Bersemangat untuk belajar, memiliki keterampilan komunikasi dan pemecahan masalah, serta tertarik pada bidang bisnis dan operasional, dengan motivasi untuk menerapkan dan mengembangkan keterampilan secara profesional.
+                </p>
+                <div class="pt-2">
+                    <a href="CV Rahmad Wahyudi.pdf" download class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl transition shadow-lg shadow-indigo-500/30">
+                        <i class="fa-solid fa-file-arrow-down"></i> Unduh CV Saya
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyek Section -->
+    <section id="proyek" class="py-20 max-w-6xl mx-auto px-6" data-aos="fade-up">
+        <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+            <h2 class="text-3xl font-bold">Pengalaman</h2>
+            <p class="text-gray-400">Portofolio riset, perencanaan strategi, dan pengelolaan operasional.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project 1 -->
+            <div class="bg-cardBg border border-gray-800 rounded-2xl overflow-hidden group hover:border-indigo-500/50 transition" data-aos="fade-up" data-aos-delay="100">
+                <div class="h-48 bg-gray-800 relative overflow-hidden slider-container">
+                    <div class="slider-track" id="track1">
+                        <div class="slider-slide zoom-container"><img src="MAGANG .jpeg" alt="Magang"></div>
+                        <div class="slider-slide zoom-container"><img src="MAGANG 2.jpeg" alt="Magang 2"></div>
+                        <div class="slider-slide zoom-container"><img src="MAGANG 3.jpeg" alt="Magang 3"></div>
+                    </div>
+                    <button class="slider-btn slider-prev" onclick="moveSlide('track1', -1)">❮</button>
+                    <button class="slider-btn slider-next" onclick="moveSlide('track1', 1)">❯</button>
+                </div>
+                <div class="p-6 space-y-4">
+                    <h3 class="text-xl font-semibold text-center">Monitoring dan Evaluasi</h3>
+                    <p class="text-sm text-gray-400">Memiliki pengalaman magang di Solo Technopark pada Divisi Program Inkubasi Bisnis, dengan tanggung jawab mengelola database tenant startup, melakukan pengarsipan dan pemeriksaan kelengkapan dokumen administrasi, serta membantu publikasi kegiatan dan program inkubasi melalui media sosial dan platform digital.</p>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-indigo-300">Workteam</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-indigo-300">Social Media</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-indigo-300">Microsoft Excel</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-indigo-300">Document Management</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-indigo-300">Digital Marketing</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Project 2 -->
+            <div class="bg-cardBg border border-gray-800 rounded-2xl overflow-hidden group hover:border-indigo-500/50 transition" data-aos="fade-up" data-aos-delay="200">
+                <div class="h-48 bg-gray-800 relative overflow-hidden slider-container">
+                    <div class="slider-track" id="track2">
+                        <div class="slider-slide zoom-container"><img src="UPK.jpeg" alt="UPK"></div>
+                        <div class="slider-slide zoom-container"><img src="UPK 2.jpeg" alt="UPK 2"></div>
+                    </div>
+                    <button class="slider-btn slider-prev" onclick="moveSlide('track2', -1)">❮</button>
+                    <button class="slider-btn slider-next" onclick="moveSlide('track2', 1)">❯</button>
+                </div>
+                <div class="p-6 space-y-4">
+                    <h3 class="text-xl font-semibold text-center">Ketua Unit Pelaksana Kegiatan (UPK) FISIP UNDIP</h3>
+                    <p class="text-sm text-gray-400">Menjabat sebagai Ketua UPK Bulu Tangkis FISIP dengan tanggung jawab memimpin dan mengoordinasikan pengurus, menyusun arah kegiatan organisasi, membagi tugas, serta memastikan setiap program kerja berjalan sesuai rencana. Turut mengoordinasikan dua program kerja utama, yaitu FISIP Cup dan FISIP Open, mulai dari perencanaan kegiatan, penyusunan anggaran, pembentukan kepanitiaan, koordinasi dengan pihak fakultas, hingga pelaksanaan dan evaluasi acara.</p>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-cyan-300">Leadership</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-cyan-300">Event Management</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-cyan-300">Problem Solving</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-cyan-300">Perencanaan Acara</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-cyan-300">Perencanaan Anggaran</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-cyan-300">Manajemen Tim</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Project 3: Barista -->
+            <div class="bg-cardBg border border-gray-800 rounded-2xl overflow-hidden group hover:border-indigo-500/50 transition" data-aos="fade-up" data-aos-delay="300">
+                <div class="h-48 bg-gray-800 relative overflow-hidden slider-container">
+                    <div class="slider-track" id="track3">
+                        <div class="slider-slide zoom-container"><img src="BARISTA.jpeg" alt="Barista"></div>
+                        <div class="slider-slide zoom-container"><img src="BARISTA 2.jpeg" alt="Barista 2"></div>
+                    </div>
+                    <button class="slider-btn slider-prev" onclick="moveSlide('track3', -1)">❮</button>
+                    <button class="slider-btn slider-next" onclick="moveSlide('track3', 1)">❯</button>
+                </div>
+                <div class="p-6 space-y-4">
+                    <h3 class="text-xl font-semibold text-center">Barista</h3>
+                    <p class="text-sm text-gray-400">Bekerja full time sebagai barista dengan tanggung jawab menyiapkan berbagai minuman, melayani pelanggan, menjaga konsistensi kualitas produk, mengelola stok bahan, serta membantu operasional kasir. Terbiasa bekerja secara efisien di tengah jam sibuk dengan mengutamakan kedisiplinan, komunikasi, dan kerja sama tim.</p>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-purple-300">Komunikasi</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-purple-300">Ketelitian</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-purple-300">Kerja Tim</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-purple-300">Problem Solving</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-purple-300">Customer Service</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Project 4: Fotografer Sport -->
+            <div class="bg-cardBg border border-gray-800 rounded-2xl overflow-hidden group hover:border-indigo-500/50 transition" data-aos="fade-up" data-aos-delay="400">
+                <div class="h-48 bg-gray-800 relative overflow-hidden slider-container">
+                    <div class="slider-track" id="track5">
+                        <div class="slider-slide zoom-container"><img src="FOTOYU.jpeg" alt="Fotografer Sport"></div>
+                    </div>
+                </div>
+                <div class="p-6 space-y-4">
+                    <h3 class="text-xl font-semibold text-center">Fotografer Sport</h3>
+                    <p class="text-sm text-gray-400">Berpengalaman sebagai fotografer olahraga di Fotoyu dengan fokus pada dokumentasi event lari, mulai dari pengambilan foto dan video, penyuntingan, hingga penjualan hasil karya. Berhasil menjual lebih dari 500 foto dan video kepada peserta, serta menangani proses unggah karya, pelayanan pelanggan, dan pengiriman file digital.</p>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-emerald-300">Videografi</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-emerald-300">Customer Service</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-emerald-300">Camera Operation</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Project 5: Fotografer Product -->
+            <div class="bg-cardBg border border-gray-800 rounded-2xl overflow-hidden group hover:border-indigo-500/50 transition" data-aos="fade-up" data-aos-delay="500">
+                <div class="h-48 bg-gray-800 relative overflow-hidden slider-container">
+                    <div class="slider-track" id="track4">
+                        <div class="slider-slide zoom-container"><img src="SKY IDN.jpeg" alt="Fotografer Product"></div>
+                    </div>
+                </div>
+                <div class="p-6 space-y-4">
+                    <h3 class="text-xl font-semibold text-center">Fotografer Product</h3>
+                    <p class="text-sm text-gray-400">Bertanggung jawab dalam fotografi produk celana olahraga, mulai dari pengambilan gambar hingga penyuntingan foto untuk menghasilkan visual yang berkualitas dan menarik bagi kebutuhan pemasaran.</p>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-pink-300">Product Photoraphy</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-pink-300">Lighting Techniques</span>
+                        <span class="px-2.5 py-1 bg-gray-800 text-xs font-medium rounded-md text-pink-300">Product Styling</span>
+                    </div>
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sertifikat Section -->
+    <section id="sertifikat" class="py-20 max-w-6xl mx-auto px-6" data-aos="fade-up">
+        <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+            <h2 class="text-3xl font-bold">Sertifikat</h2>
+            <p class="text-gray-400">Daftar sertifikasi profesional yang telah saya peroleh.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-cardBg border border-gray-800 rounded-2xl overflow-hidden group hover:border-indigo-500/50 transition">
+                <div class="h-48 bg-gray-800 relative overflow-hidden zoom-container" id="zoomCard">
+                    <img src="SERTIFIKAT CONTENT CREATOR.png" alt="Sertifikat Content Creator" id="zoomImg">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-semibold">Sertifikat Kompetensi Content Creator</h3>
+                </div>
+            </div>
+            <div class="bg-cardBg border border-gray-800 rounded-2xl overflow-hidden group hover:border-indigo-500/50 transition">
+                <div class="h-48 bg-gray-800 relative overflow-hidden zoom-container">
+                    <img src="SERTIFIKAT DIGITAL MEDIA PLANNER.png" alt="Sertifikat Digital Media Planner">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-semibold">Sertifikat Digital Media Planner</h3>
+                </div>
+            </div>
+            <div class="bg-cardBg border border-gray-800 rounded-2xl overflow-hidden group hover:border-indigo-500/50 transition">
+                <div class="h-48 bg-gray-800 relative overflow-hidden zoom-container">
+                    <img src="SERTIFIKAT DIGITAL MERKETING.png" alt="Sertifikat Digital Marketing">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-semibold">Sertifikat Digital Marketing</h3>
+                </div>
+            </div>
+            <div class="bg-cardBg border border-gray-800 rounded-2xl overflow-hidden group hover:border-indigo-500/50 transition">
+                <div class="h-48 bg-gray-800 relative overflow-hidden zoom-container">
+                    <img src="SERTIFIKAT MAGANG.png" alt="Sertifikat Magang">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-semibold">Sertifikat Magang</h3>
+                </div>
+            </div>
+            <div class="bg-cardBg border border-gray-800 rounded-2xl overflow-hidden group hover:border-indigo-500/50 transition">
+                <div class="h-48 bg-gray-800 relative overflow-hidden zoom-container">
+                    <img src="SERTIFIKAT PELATIHAN.png" alt="Sertifikat Pelatihan">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-semibold">Sertifikat Pelatihan</h3>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Keahlian Section -->
+    <section id="keahlian" class="py-20 bg-gray-900/50 border-t border-gray-800/60" data-aos="fade-up">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <h2 class="text-3xl font-bold">Keahlian & Teknologi</h2>
+                <p class="text-gray-400">Tools dan perangkat lunak yang biasa saya gunakan dalam produktivitas & pekerjaan.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="p-6 bg-cardBg border border-gray-800 rounded-2xl flex items-center gap-4 hover:border-indigo-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                    <img src="dc4f8b5f263ff686a5e7462823397b20.jpg" alt="Microsoft Word" class="w-12 h-12 object-contain rounded-lg bg-white/5 p-1 transition-transform duration-300 hover:scale-110">
+                    <div>
+                        <h4 class="font-semibold text-sm">Microsoft Word</h4>
+                        <p class="text-xs text-gray-400">Document Processing</p>
+                    </div>
+                </div>
+                <div class="p-6 bg-cardBg border border-gray-800 rounded-2xl flex items-center gap-4 hover:border-indigo-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                    <img src="1771a05ffcf9b24bee1d5392e17043e7.jpg" alt="Microsoft Excel" class="w-12 h-12 object-contain rounded-lg bg-white/5 p-1 transition-transform duration-300 hover:scale-110">
+                    <div>
+                        <h4 class="font-semibold text-sm">Microsoft Excel</h4>
+                        <p class="text-xs text-gray-400">Spreadsheet & Data</p>
+                    </div>
+                </div>
+                <div class="p-6 bg-cardBg border border-gray-800 rounded-2xl flex items-center gap-4 hover:border-indigo-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                    <img src="POWERPOINT.jpg" alt="Microsoft PowerPoint" class="w-12 h-12 object-contain rounded-lg bg-white/5 p-1 transition-transform duration-300 hover:scale-110">
+                    <div>
+                        <h4 class="font-semibold text-sm">PowerPoint</h4>
+                        <p class="text-xs text-gray-400">Presentation Design</p>
+                    </div>
+                </div>
+                <div class="p-6 bg-cardBg border border-gray-800 rounded-2xl flex items-center gap-4 hover:border-indigo-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                    <img src="5729451b5fb3d836371d372bc106d270.jpg" alt="Google Docs" class="w-12 h-12 object-contain rounded-lg bg-white/5 p-1 transition-transform duration-300 hover:scale-110">
+                    <div>
+                        <h4 class="font-semibold text-sm">Google Docs</h4>
+                        <p class="text-xs text-gray-400">Collaborative Writing</p>
+                    </div>
+                </div>
+                <div class="p-6 bg-cardBg border border-gray-800 rounded-2xl flex items-center gap-4 hover:border-indigo-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                    <img src="e605ecbb58a47b49e8553acf5aca039b.jpg" alt="Spreadsheet" class="w-12 h-12 object-contain rounded-lg bg-white/5 p-1 transition-transform duration-300 hover:scale-110">
+                    <div>
+                        <h4 class="font-semibold text-sm">Spreadsheet</h4>
+                        <p class="text-xs text-gray-400">Google Sheets</p>
+                    </div>
+                </div>
+                <div class="p-6 bg-cardBg border border-gray-800 rounded-2xl flex items-center gap-4 hover:border-indigo-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                    <img src="07f421ac1791895d8479d6de6259dabc.jpg" alt="Canva" class="w-12 h-12 object-contain rounded-lg bg-white/5 p-1 transition-transform duration-300 hover:scale-110">
+                    <div>
+                        <h4 class="font-semibold text-sm">Canva</h4>
+                        <p class="text-xs text-gray-400">Graphic Design</p>
+                    </div>
+                </div>
+                <div class="p-6 bg-cardBg border border-gray-800 rounded-2xl flex items-center gap-4 hover:border-indigo-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                    <img src="9c726fd9c92ae103a904bd2d15e977d5.jpg" alt="CapCut" class="w-12 h-12 object-contain rounded-lg bg-white/5 p-1 transition-transform duration-300 hover:scale-110">
+                    <div>
+                        <h4 class="font-semibold text-sm">CapCut</h4>
+                        <p class="text-xs text-gray-400">Video Editing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak Section -->
+    <section id="kontak" class="py-20 max-w-xl mx-auto px-6 text-center" data-aos="fade-in">
+        <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-20 -bottom-20 w-60 h-60 bg-indigo-600/10 rounded-full blur-3xl"></div>
+            <div class="relative z-10 space-y-6 flex flex-col items-center">
+                <h2 class="text-3xl font-bold">Mari Berkolaborasi!</h2>
+                <div class="space-y-3 text-sm text-gray-300 text-left w-full max-w-xs">
+                    <div class="flex items-center gap-3">
+                        <img src="EMAIL.jpg" alt="Email" class="w-6 h-6 object-contain">
+                        <span>rahmadwahyudi368@gmail.com</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <img src="WHATSSAP.jpg" alt="WhatsApp" class="w-6 h-6 object-contain">
+                        <span>081271374171</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-800 text-center text-sm text-gray-500">
+        <p>&copy; 2026 Portofolio.dev. Dibuat dengan penuh semangat.</p>
+    </footer>
+
+    <script>
+        function moveSlide(trackId, direction) {
+            const track = document.getElementById(trackId);
+            const slides = track.querySelectorAll('.slider-slide');
+            const totalSlides = slides.length;
+            
+            let currentIndex = parseInt(track.dataset.index || 0);
+            currentIndex += direction;
+            
+            if (currentIndex < 0) {
+                currentIndex = totalSlides - 1;
+            } else if (currentIndex >= totalSlides) {
+                currentIndex = 0;
+            }
+            
+            track.dataset.index = currentIndex;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        // Auto slide on hover
+        document.querySelectorAll('.slider-container').forEach(container => {
+            let slideInterval;
+            const track = container.querySelector('.slider-track');
+            
+            container.addEventListener('mouseenter', () => {
+                slideInterval = setInterval(() => {
+                    const trackId = track.id;
+                    moveSlide(trackId, 1);
+                }, 2000); // 2 detik per slide
+            });
+
+            container.addEventListener('mouseleave', () => {
+                clearInterval(slideInterval);
+            });
+        });
+
+        // Zoom and pan on hover for all experiences (slider-slide) and certificates (zoom-container)
+        document.querySelectorAll('.slider-container, .zoom-container').forEach(container => {
+            const zoomImg = container.querySelector('img');
+            if (container && zoomImg) {
+                let isZoomed = false;
+
+                container.addEventListener('mouseenter', () => {
+                    isZoomed = true;
+                    zoomImg.style.transform = 'scale(2)';
+                });
+
+                container.addEventListener('mousemove', (e) => {
+                    if (!isZoomed) return;
+                    const rect = container.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    zoomImg.style.transformOrigin = `${x}% ${y}%`;
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    isZoomed = false;
+                    zoomImg.style.transform = 'scale(1)';
+                    zoomImg.style.transformOrigin = 'center center';
+                });
+            }
+        });
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>
